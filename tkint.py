@@ -54,6 +54,8 @@ def detectviolation(event=None):
     while True :
         start = timeit.default_timer()
         ret, frame = cap.read()
+        if(ret==0):
+            break
         frame_og = frame
         l, a, b = cv2.split(frame)
         clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(1, 1))
@@ -186,12 +188,7 @@ def detectviolation(event=None):
         cv2.imwrite('Offenders/lane2/' + str(v) + '.jpeg', li)
         u += 1
     cap.release()
-    cv2.waitKey(1)
     cv2.destroyAllWindows()
-    for i in range(1,5):
-        cv2.waitkey(1)
-    return
-
 
 root=Tk()
 root.title("Traffic Violation System")
